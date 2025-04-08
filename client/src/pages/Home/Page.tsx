@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -16,21 +15,38 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-import hotels from "@/../public/hotes.json";
+import hotels from "@/../public/hotels.json";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import axios from "axios";
 
 export default function Page() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [guests, setGuests] = useState("");
+
+  const handleBooking = useCallback(
+    async (hotelId: number) => {
+      console.log("Inside: ", hotelId);
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/hotel/book`,
+        {
+          hotelId: hotelId.toString(),
+          guests: Number(guests),
+        },
+        { withCredentials: true }
+      );
+
+      console.log("Response: ", response);
+    },
+    [guests]
+  );
   return (
     <div className=" p-10 grid grid-cols-3 h-screen">
-      {hotels.value.map((hotel) => (
-        <div key={hotel.HotelId} className="p-4 ">
+      {hotels.map((hotel) => (
+        <div key={hotel.id} className="p-4 ">
           <Card className="w-full h-full">
             <CardHeader>
-              <CardTitle>{hotel.HotelName}</CardTitle>
-              <CardDescription>{hotel.Description}</CardDescription>
+              <CardTitle>{hotel.name}</CardTitle>
+              <CardDescription>{hotel.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <p>Hotel Content</p>
@@ -46,20 +62,16 @@ export default function Page() {
                   <DialogHeader>
                     <DialogTitle>Confirm your booking</DialogTitle>
 
-                    <Label htmlFor="guest">Guest</Label>
-                    <div className="flex gap-5">
-                      <Input
-                        id="guest"
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="First Name"
-                      />
-                      <Input
-                        onChange={(e) => setLastName(e.target.value)}
-                        placeholder="Last Name"
-                      />
-                    </div>
+                    <Input
+                      type="number"
+                      placeholder="Number of guests"
+                      value={guests}
+                      onChange={(e) => setGuests(e.target.value)}
+                    />
 
-                    <Button>Proceed to book</Button>
+                    <Button onClick={() => handleBooking(hotel.id)}>
+                      Proceed to book
+                    </Button>
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
