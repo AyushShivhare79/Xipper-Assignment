@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import secret from "../config";
 
-interface User {
+export interface User {
   id: string;
   email: string;
   createdAt: Date;

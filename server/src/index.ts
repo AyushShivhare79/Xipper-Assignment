@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import routes from "./routes/index";
 import cookieParser from "cookie-parser";
+import authMiddleware from "./middleware";
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -18,6 +20,13 @@ app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
+});
+
+app.get("/me", authMiddleware, (req, res) => {
+  res.status(200).json({
+    message: "Authorized",
+  });
+  return;
 });
 
 app.use("/api", routes);
