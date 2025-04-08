@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npx tsc -w & nodemon dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,10 +16,15 @@
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "express": "^5.1.0",
+    "prisma": "^6.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "cors": "^2.8.5"
+    "@prisma/client": "6.5.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "nodemon": "^3.1.9",
+    "save-dev": "0.0.1-security"
   }
 }
