@@ -3,6 +3,7 @@ import "./App.css";
 import Signin from "./pages/auth/Signin";
 import Page from "./pages/Home/Page";
 import Signup from "./pages/auth/Signup";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
@@ -10,7 +11,14 @@ function App() {
       <Routes>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Page />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Page />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

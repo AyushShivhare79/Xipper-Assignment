@@ -4,14 +4,14 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 export const hotelBooking = async (req: Request, res: Response) => {
-  const { hotelId, guests, userId } = req.body;
+  const { hotelId, guests } = req.body;
 
   try {
     const booking = await prisma.hotel.create({
       data: {
         hotelId,
         guests,
-        userId,
+        userId: req.userId!,
       },
     });
 

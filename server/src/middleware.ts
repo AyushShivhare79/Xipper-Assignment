@@ -3,8 +3,13 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import secret from "./config";
 import { User } from "./lib/generateToken";
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const authMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.cookies.token;
+  console.log("Token: ", token);
 
   if (!token) {
     res.status(403).json({ message: "Invalid request" });
@@ -13,7 +18,8 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const decoded = jwt.verify(token, secret) as User;
-    req.body.userId = decoded.id;
+    console.log("Decoded: ", decoded);
+    req.userId = decoded.id;
     next();
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
