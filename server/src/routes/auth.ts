@@ -1,7 +1,5 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 import { signIn, signUp } from "../controllers/auth";
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
 
 const router = Router();
 
