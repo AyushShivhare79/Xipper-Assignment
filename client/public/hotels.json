@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "Grand Palace Hotel",
+    "location": "New York, USA",
+    "rating": 4.5,
+    "price": 150,
+    "amenities": ["WiFi", "Pool", "Spa", "Gym", "Restaurant"],
+    "available": true,
+    "description": "A luxurious hotel in the heart of New York City, offering world-class amenities and skyline views."
+  },
+  {
+    "id": 2,
+    "name": "Ocean View Resort",
+    "location": "Miami, USA",
+    "rating": 4.8,
+    "price": 220,
+    "amenities": ["WiFi", "Beach Access", "Pool", "Bar"],
+    "available": true,
+    "description": "Wake up to the sound of the waves at this stunning beachfront resort in Miami."
+  },
+  {
+    "id": 3,
+    "name": "Mountain Lodge",
+    "location": "Aspen, USA",
+    "rating": 4.3,
+    "price": 180,
+    "amenities": ["WiFi", "Skiing", "Sauna"],
+    "available": false,
+    "description": "Perfect for ski lovers and mountain explorers. Cozy rooms with breathtaking views."
+  },
+  {
+    "id": 4,
+    "name": "City Central Inn",
+    "location": "London, UK",
+    "rating": 4.0,
+    "price": 130,
+    "amenities": ["WiFi", "Breakfast", "Gym"],
+    "available": true,
+    "description": "Located in downtown London, ideal for travelers and business visitors."
+  },
+  {
+    "id": 5,
+    "name": "Riverside Retreat",
+    "location": "Paris, France",
+    "rating": 4.6,
+    "price": 200,
+    "amenities": ["WiFi", "Spa", "Bar"],
+    "available": false,
+    "description": "Romantic riverside stay near the Eiffel Tower with cozy French elegance."
+  },
+  {
+    "id": 6,
+    "name": "Desert Mirage Hotel",
+    "location": "Dubai, UAE",
+    "rating": 4.9,
+    "price": 300,
+    "amenities": ["WiFi", "Pool", "Spa", "Restaurant"],
+    "available": true,
+    "description": "Luxury hotel in the heart of Dubai, blending modernity and tradition."
+  },
+  {
+    "id": 7,
+    "name": "Tokyo Tower Hotel",
+    "location": "Tokyo, Japan",
+    "rating": 4.7,
+    "price": 210,
+    "amenities": ["WiFi", "Gym", "Bar", "Breakfast"],
+    "available": true,
+    "description": "Modern and sleek, with views of the iconic Tokyo Tower."
+  },
+  {
+    "id": 8,
+    "name": "Bali Beach Resort",
+    "location": "Bali, Indonesia",
+    "rating": 4.4,
+    "price": 170,
+    "amenities": ["WiFi", "Beach Access", "Yoga", "Spa"],
+    "available": false,
+    "description": "Tropical paradise with beachfront villas and holistic wellness retreats."
+  },
+  {
+    "id": 9,
+    "name": "Snowy Peaks Lodge",
+    "location": "Zermatt, Switzerland",
+    "rating": 4.6,
+    "price": 250,
+    "amenities": ["WiFi", "Skiing", "Sauna", "Breakfast"],
+    "available": true,
+    "description": "Charming alpine lodge offering easy ski access and mountain serenity."
+  },
+  {
+    "id": 10,
+    "name": "Vintage Villa",
+    "location": "Rome, Italy",
+    "rating": 4.2,
+    "price": 140,
+    "amenities": ["WiFi", "Garden", "Breakfast"],
+    "available": true,
+    "description": "A cozy stay in a historical villa close to the Colosseum."
+  },
+  {
+    "id": 11,
+    "name": "Sydney Harbour Hotel",
+    "location": "Sydney, Australia",
+    "rating": 4.5,
+    "price": 190,
+    "amenities": ["WiFi", "Pool", "Restaurant", "Bar"],
+    "available": true,
+    "description": "Unbeatable views of the Opera House and a perfect city escape."
+  },
+  {
+    "id": 12,
+    "name": "The Green Escape",
+    "location": "Vancouver, Canada",
+    "rating": 4.1,
+    "price": 160,
+    "amenities": ["WiFi", "Gym", "Eco Friendly"],
+    "available": false,
+    "description": "Eco-conscious hotel surrounded by nature and the city skyline."
+  },
+  {
+    "id": 13,
+    "name": "Cape Town Heights",
+    "location": "Cape Town, South Africa",
+    "rating": 4.3,
+    "price": 175,
+    "amenities": ["WiFi", "Pool", "Safari Tours"],
+    "available": true,
+    "description": "A perfect mix of ocean breeze, mountains, and luxury comfort."
+  },
+  {
+    "id": 14,
+    "name": "Berlin Central Hotel",
+    "location": "Berlin, Germany",
+    "rating": 4.0,
+    "price": 120,
+    "amenities": ["WiFi", "Breakfast", "Gym"],
+    "available": true,
+    "description": "Smart, clean, and central to all Berlin attractions."
+  },
+  {
+    "id": 15,
+    "name": "Nordic Nights Hotel",
+    "location": "Reykjavik, Iceland",
+    "rating": 4.4,
+    "price": 210,
+    "amenities": ["WiFi", "Hot Springs", "Northern Lights View"],
+    "available": false,
+    "description": "Enjoy the aurora from your room in this magical Nordic stay."
+  },
+  {
+    "id": 16,
+    "name": "Bangkok Boutique Hotel",
+    "location": "Bangkok, Thailand",
+    "rating": 4.2,
+    "price": 100,
+    "amenities": ["WiFi", "Spa", "Massage", "Restaurant"],
+    "available": true,
+    "description": "Colorful, budget-friendly, and close to night markets and temples."
+  },
+  {
+    "id": 17,
+    "name": "Rio Paradise",
+    "location": "Rio de Janeiro, Brazil",
+    "rating": 4.3,
+    "price": 160,
+    "amenities": ["WiFi", "Beach Access", "Bar"],
+    "available": true,
+    "description": "Sunny vibes, samba rhythms, and Copacabana just steps away."
+  },
+  {
+    "id": 18,
+    "name": "Shanghai Grand Hotel",
+    "location": "Shanghai, China",
+    "rating": 4.6,
+    "price": 220,
+    "amenities": ["WiFi", "Gym", "Restaurant", "Spa"],
+    "available": false,
+    "description": "A blend of Eastern luxury and modern skyscraper living."
+  },
+  {
+    "id": 19,
+    "name": "Cairo Heritage Inn",
+    "location": "Cairo, Egypt",
+    "rating": 4.1,
+    "price": 110,
+    "amenities": ["WiFi", "Breakfast", "Pyramid Tours"],
+    "available": true,
+    "description": "Experience Egyptian history and culture in comfort and style."
+  },
+  {
+    "id": 20,
+    "name": "Helsinki Harbour Hotel",
+    "location": "Helsinki, Finland",
+    "rating": 4.3,
+    "price": 180,
+    "amenities": ["WiFi", "Sauna", "Bar"],
+    "available": true,
+    "description": "Warm hospitality in the north with cozy rooms and sea views."
+  }
+]

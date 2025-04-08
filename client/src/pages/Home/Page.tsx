@@ -16,21 +16,22 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-import hotels from "@/../public/hotes.json";
+import hotels from "@/../public/hotels.json";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export default function Page() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [guests, setGuests] = useState(1);
   return (
     <div className=" p-10 grid grid-cols-3 h-screen">
-      {hotels.value.map((hotel) => (
-        <div key={hotel.HotelId} className="p-4 ">
+      {hotels.map((hotel) => (
+        <div key={hotel.id} className="p-4 ">
           <Card className="w-full h-full">
             <CardHeader>
-              <CardTitle>{hotel.HotelName}</CardTitle>
-              <CardDescription>{hotel.Description}</CardDescription>
+              <CardTitle>{hotel.name}</CardTitle>
+              <CardDescription>{hotel.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <p>Hotel Content</p>
@@ -46,17 +47,35 @@ export default function Page() {
                   <DialogHeader>
                     <DialogTitle>Confirm your booking</DialogTitle>
 
-                    <Label htmlFor="guest">Guest</Label>
-                    <div className="flex gap-5">
-                      <Input
-                        id="guest"
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="First Name"
-                      />
-                      <Input
-                        onChange={(e) => setLastName(e.target.value)}
-                        placeholder="Last Name"
-                      />
+                    <div className="space-y-5">
+                      <div className="flex flex-col gap-2">
+                        <Label className="text-xl" htmlFor="firstName">
+                          First name
+                        </Label>
+                        <Input
+                          type="text"
+                          placeholder="First name"
+                          onChange={(e) => setFirstName(e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-xl" htmlFor="lastName">
+                          Last name
+                        </Label>
+
+                        <Input
+                          type="text"
+                          placeholder="Last name"
+                          onChange={(e) => setLastName(e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <Label className="text-xl" htmlFor="guests">
+                          Number of guests
+                        </Label>
+                        <Input type="number" placeholder="Number of guests" />
+                      </div>
                     </div>
 
                     <Button>Proceed to book</Button>
