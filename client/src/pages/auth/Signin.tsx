@@ -15,6 +15,9 @@ export default function Signin() {
         {
           email,
           password,
+        },
+        {
+          withCredentials: true,
         }
       );
 
