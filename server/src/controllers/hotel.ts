@@ -13,7 +13,6 @@ export const hotelBooking = async (req: Request, res: Response) => {
   }
 
   try {
-    console.log("Reach here");
     const booking = await prisma.booking.create({
       data: {
         guestCount,
@@ -27,7 +26,7 @@ export const hotelBooking = async (req: Request, res: Response) => {
       aadhar: `Aadhar ${index + 1}`,
       bookingId: booking.id,
     }));
-    
+
     await prisma.guest.createMany({
       data: guests,
     });

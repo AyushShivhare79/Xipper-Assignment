@@ -5,6 +5,7 @@ import Page from "./pages/Home/Page";
 import Signup from "./pages/Auth/Signup";
 import AuthRoute from "./AuthRoute";
 import CheckIn from "./pages/CheckIn/CheckIn";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
           path="/"
           element={
             <AuthRoute isProtected>
-              <Page />
+              <div>
+                <Navbar />
+                <Page />
+              </div>
             </AuthRoute>
           }
         />
@@ -23,7 +27,10 @@ function App() {
           path="/checkin"
           element={
             <AuthRoute isProtected>
-              <CheckIn />
+              <div>
+                <Navbar />
+                <CheckIn />
+              </div>
             </AuthRoute>
           }
         />

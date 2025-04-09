@@ -25,12 +25,11 @@ export default function Page() {
 
   const handleBooking = useCallback(
     async (hotelId: number) => {
-      console.log("Inside: ", hotelId);
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/hotel/book`,
         {
           hotelId: hotelId.toString(),
-          guests: Number(guests),
+          guestCount: Number(guests),
         },
         { withCredentials: true }
       );
