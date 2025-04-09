@@ -4,15 +4,32 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 export const hotelBooking = async (req: Request, res: Response) => {
-  const { hotelId, guests } = req.body;
+  const { hotelId, guestCount } = req.body;
+
+  if (!hotelId || !guestCount || !req.userId) {
+    console.error("Missing required fields");
+    res.status(400).json({ message: "Missing required fields" });
+    return;
+  }
 
   try {
-    const booking = await prisma.hotel.create({
+    console.log("Reach here");
+    const booking = await prisma.booking.create({
       data: {
+        guestCount,
         hotelId,
-        guests,
-        userId: req.userId!,
+        userId: req.userId,
       },
+    });
+
+    const guests = Array.from({ length: guestCount }, (_, index) => ({
+      fullName: `Guest ${index + 1}`,
+      aadhar: `Aadhar ${index + 1}`,
+      bookingId: booking.id,
+    }));
+    
+    await prisma.guest.createMany({
+      data: guests,
     });
 
     res.status(201).json({
@@ -27,24 +44,26 @@ export const hotelBooking = async (req: Request, res: Response) => {
   }
 };
 
-export const checkIn = async (req: Request, res: Response) => {
-  const { aadhar, hotelId } = req.body;
+export const getBookedHotels = async (req: Request, res: Response) => {
+  if (!req.userId) {
+    console.error("User ID is missing");
+    res.status(400).json({ message: "User ID is missing" });
+    return;
+  }
+
   try {
-    const checkIn = await prisma.checkIn.create({
-      data: {
-        aadhar,
-        hotelId,
+    const bookings = await prisma.booking.findMany({
+      where: {
+        userId: req.userId,
+      },
+      include: {
+        guests: true,
       },
     });
 
-    res.status(200).json({
-      message: "Check-in successful",
-      checkIn,
-    });
-    return;
+    res.status(200).json(bookings);
   } catch (error) {
-    console.error("Error checking in:", error);
+    console.error("Error fetching booked hotels:", error);
     res.status(500).json({ message: "Internal server error" });
-    return;
   }
 };

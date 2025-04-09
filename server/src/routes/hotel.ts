@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { checkIn, hotelBooking } from "../controllers/hotel";
-import authMiddleware from "../middleware";
+import { getBookedHotels, hotelBooking } from "../controllers/hotel";
+import { checkIn } from "../controllers/checkin";
 
 const router = Router();
 
-router.post("/book",  hotelBooking);
+router.post("/book", hotelBooking);
 router.post("/checkIn", checkIn);
+router.get("/bookedHotels", getBookedHotels);
 
 export default router;
