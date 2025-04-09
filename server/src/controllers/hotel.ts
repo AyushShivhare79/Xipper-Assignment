@@ -27,24 +27,3 @@ export const hotelBooking = async (req: Request, res: Response) => {
   }
 };
 
-export const checkIn = async (req: Request, res: Response) => {
-  const { aadhar, hotelId } = req.body;
-  try {
-    const checkIn = await prisma.checkIn.create({
-      data: {
-        aadhar,
-        hotelId,
-      },
-    });
-
-    res.status(200).json({
-      message: "Check-in successful",
-      checkIn,
-    });
-    return;
-  } catch (error) {
-    console.error("Error checking in:", error);
-    res.status(500).json({ message: "Internal server error" });
-    return;
-  }
-};

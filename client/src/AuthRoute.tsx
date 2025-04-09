@@ -2,11 +2,17 @@ import { Navigate } from "react-router";
 import axios from "axios";
 import { JSX, useEffect, useState } from "react";
 
-export default function ProtectedRoute({
-  children,
-}: {
+interface AuthRouteProps {
   children: JSX.Element;
-}) {
+  isProtected?: boolean;
+  redirectTo?: string;
+}
+
+export default function AuthRoute({
+  children,
+  isProtected = false,
+  redirectTo = isProtected ? "/signin" : "/",
+}: AuthRouteProps) {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -19,10 +25,12 @@ export default function ProtectedRoute({
             withCredentials: true,
           }
         );
+
         if (response.status === 200) {
           setIsAuthenticated(true);
         }
       } catch (error) {
+        console.error(error);
         setIsAuthenticated(false);
       } finally {
         setLoading(false);
@@ -33,5 +41,13 @@ export default function ProtectedRoute({
 
   if (loading) return <div>Loading...</div>;
 
-  return isAuthenticated ? children : <Navigate to="/signin" />;
+  if (isProtected && !isAuthenticated) {
+    return <Navigate to={redirectTo} />;
+  }
+
+  if (!isProtected && isAuthenticated) {
+    return <Navigate to={redirectTo} />;
+  }
+
+  return children;
 }

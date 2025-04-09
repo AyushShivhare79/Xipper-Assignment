@@ -1,11 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
+
 import axios from "axios";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -20,8 +24,10 @@ export default function Signin() {
           withCredentials: true,
         }
       );
-
-      console.log("Response: ", response.data);
+      if (response.status === 200) {
+        console.log("Signin successful");
+        await navigate("/");
+      }
     },
     [email, password]
   );
