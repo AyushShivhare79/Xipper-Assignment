@@ -4,21 +4,20 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 export const checkIn = async (req: Request, res: Response) => {
-  const { aadhar, hotelId } = req.body;
-  console.log("Aadhar: ", aadhar);
-  console.log("Hotel ID: ", hotelId);
+  const { fullName, aadhar, bookingId } = req.body;
 
   try {
-    const checkIn = await prisma.checkIn.create({
+    const checkin = await prisma.guest.create({
       data: {
-        hotelId,
+        fullName,
         aadhar,
+        bookingId,
       },
     });
 
     res.status(200).json({
       message: "Check-in successful",
-      checkIn,
+      checkin,
     });
     return;
   } catch (error) {

@@ -4,14 +4,20 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 export const hotelBooking = async (req: Request, res: Response) => {
-  const { hotelId, guests } = req.body;
+  const { hotelId, guestCount } = req.body;
+
+  if (!hotelId || !guestCount || !req.userId) {
+    console.error("Missing required fields");
+    res.status(400).json({ message: "Missing required fields" });
+    return;
+  }
 
   try {
-    const booking = await prisma.hotel.create({
+    const booking = await prisma.booking.create({
       data: {
+        guestCount,
         hotelId,
-        guests,
-        userId: req.userId!,
+        userId: req.userId,
       },
     });
 
@@ -26,4 +32,3 @@ export const hotelBooking = async (req: Request, res: Response) => {
     return;
   }
 };
-

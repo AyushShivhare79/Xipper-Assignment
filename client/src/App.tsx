@@ -4,6 +4,7 @@ import Signin from "./pages/Auth/Signin";
 import Page from "./pages/Home/Page";
 import Signup from "./pages/Auth/Signup";
 import AuthRoute from "./AuthRoute";
+import CheckIn from "./pages/CheckIn/CheckIn";
 
 function App() {
   return (
@@ -14,6 +15,15 @@ function App() {
           element={
             <AuthRoute isProtected>
               <Page />
+            </AuthRoute>
+          }
+        />
+
+        <Route
+          path="/checkin"
+          element={
+            <AuthRoute isProtected>
+              <CheckIn />
             </AuthRoute>
           }
         />
