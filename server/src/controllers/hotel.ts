@@ -13,12 +13,23 @@ export const hotelBooking = async (req: Request, res: Response) => {
   }
 
   try {
+    console.log("Reach here");
     const booking = await prisma.booking.create({
       data: {
         guestCount,
         hotelId,
         userId: req.userId,
       },
+    });
+
+    const guests = Array.from({ length: guestCount }, (_, index) => ({
+      fullName: `Guest ${index + 1}`,
+      aadhar: `Aadhar ${index + 1}`,
+      bookingId: booking.id,
+    }));
+    
+    await prisma.guest.createMany({
+      data: guests,
     });
 
     res.status(201).json({
@@ -30,5 +41,29 @@ export const hotelBooking = async (req: Request, res: Response) => {
     console.error("Error creating booking:", error);
     res.status(500).json({ message: "Internal server error" });
     return;
+  }
+};
+
+export const getBookedHotels = async (req: Request, res: Response) => {
+  if (!req.userId) {
+    console.error("User ID is missing");
+    res.status(400).json({ message: "User ID is missing" });
+    return;
+  }
+
+  try {
+    const bookings = await prisma.booking.findMany({
+      where: {
+        userId: req.userId,
+      },
+      include: {
+        guests: true,
+      },
+    });
+
+    res.status(200).json(bookings);
+  } catch (error) {
+    console.error("Error fetching booked hotels:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
