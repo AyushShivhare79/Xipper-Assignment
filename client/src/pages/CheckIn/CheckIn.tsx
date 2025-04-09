@@ -2,11 +2,10 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import hotels from "@/../public/hotels.json";
 import { Input } from "@/components/ui/input";
@@ -48,80 +47,105 @@ export default function CheckIn() {
     getBookedHotels();
   }, []);
 
+  const handleCheckin = useCallback(
+    async (guestId: string, firstName: string, aadhar: string) => {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/hotel/checkin`,
+        {
+          guestId: guestId,
+          fullName: firstName,
+          aadhar: aadhar,
+        },
+        { withCredentials: true }
+      );
+      if (response.status === 200) {
+        alert("Checkin successful");
+      } else {
+        alert("Checkin failed");
+      }
+    },
+    []
+  );
+
   return (
     <>
-      {bookedHotels.map((hotel) => (
-        <Card>
-          <CardHeader>
-            <CardTitle>{hotels[hotel.hotelId].name}</CardTitle>
-            <CardDescription>
-              {hotels[hotel.hotelId].description}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-5">
-              {hotel.guests.map((guest) => (
-                <div className="flex gap-4">
-                  <Input
-                    type="text"
-                    onChange={(e) => {
-                      // guest.fullName = e.target.value;
-                      setBookedHotels((prev) =>
-                        prev.map((h) => {
-                          if (h.id === hotel.id) {
-                            return {
-                              ...h,
-                              guests: h.guests.map((g) => {
-                                if (g.id === guest.id) {
-                                  return { ...g, fullName: e.target.value };
-                                }
-                                return g;
-                              }),
-                            };
-                          }
-                          return h;
-                        })
-                      );
-                    }}
-                    value={guest.fullName}
-                    placeholder="Full Name"
-                  />
+      <div className="flex flex-col justify-center items-center gap-10 p-10">
+        {bookedHotels.map((hotel) => (
+          <Card key={hotel.id} className="w-[60%]">
+            <CardHeader>
+              <CardTitle>{hotels[Number(hotel.hotelId)].name}</CardTitle>
+              <CardDescription>
+                {hotels[Number(hotel.hotelId)].description}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-5">
+                {hotel.guests.map((guest) => (
+                  <div className="flex gap-4">
+                    <Input
+                      type="text"
+                      onChange={(e) => {
+                        setBookedHotels((prev) =>
+                          prev.map((h) => {
+                            if (h.id === hotel.id) {
+                              return {
+                                ...h,
+                                guests: h.guests.map((g) => {
+                                  if (g.id === guest.id) {
+                                    return { ...g, fullName: e.target.value };
+                                  }
+                                  return g;
+                                }),
+                              };
+                            }
+                            return h;
+                          })
+                        );
+                      }}
+                      value={guest.fullName}
+                      placeholder="Full Name"
+                    />
 
-                  <Input
-                    type="text"
-                    onChange={(e) => {
-                      // guest.aadhar = e.target.value;
-                      setBookedHotels((prev) =>
-                        prev.map((h) => {
-                          if (h.id === hotel.id) {
-                            return {
-                              ...h,
-                              guests: h.guests.map((g) => {
-                                if (g.id === guest.id) {
-                                  return { ...g, aadhar: e.target.value };
-                                }
-                                return g;
-                              }),
-                            };
-                          }
-                          return h;
-                        })
-                      );
-                    }}
-                    value={guest.aadhar}
-                    placeholder="Aadhar"
-                  />
+                    <Input
+                      type="text"
+                      onChange={(e) => {
+                        setBookedHotels((prev) =>
+                          prev.map((h) => {
+                            if (h.id === hotel.id) {
+                              return {
+                                ...h,
+                                guests: h.guests.map((g) => {
+                                  if (g.id === guest.id) {
+                                    return { ...g, aadhar: e.target.value };
+                                  }
+                                  return g;
+                                }),
+                              };
+                            }
+                            return h;
+                          })
+                        );
+                      }}
+                      value={guest.aadhar}
+                      placeholder="Aadhar"
+                    />
 
-                  <Button variant="default">Checkin</Button>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-          {/* <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter> */}
-        </Card>
-      ))}
+                    <Button
+                      className="cursor-pointer"
+                      onClick={() => {
+                        handleCheckin(guest.id, guest.fullName, guest.aadhar);
+                      }}
+                      variant="default"
+                    >
+                      Check In
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </>
   );
 }

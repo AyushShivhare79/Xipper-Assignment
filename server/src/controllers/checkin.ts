@@ -4,14 +4,16 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 export const checkIn = async (req: Request, res: Response) => {
-  const { fullName, aadhar, bookingId } = req.body;
+  const { guestId, fullName, aadhar, bookingId } = req.body;
 
   try {
-    const checkin = await prisma.guest.create({
+    const checkin = await prisma.guest.update({
+      where: {
+        id: guestId,
+      },
       data: {
         fullName,
         aadhar,
-        bookingId,
       },
     });
 
