@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import "./App.css";
 import Signin from "./pages/Auth/Signin";
-import Page from "./pages/Home/Page";
+import Home from "./pages/Home/Home";
 import Signup from "./pages/Auth/Signup";
 import AuthRoute from "./AuthRoute";
 import CheckIn from "./pages/CheckIn/CheckIn";
@@ -17,7 +17,7 @@ function App() {
             <AuthRoute isProtected>
               <div>
                 <Navbar />
-                <Page />
+                <Home />
               </div>
             </AuthRoute>
           }

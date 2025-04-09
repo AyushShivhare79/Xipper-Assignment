@@ -17,6 +17,7 @@ interface Guests {
   aadhar: string;
   createdAt: Date;
   updatedAt: Date;
+  bookingId: string;
 }
 
 interface BookedHotels {
@@ -48,7 +49,7 @@ export default function CheckIn() {
 
   const handleCheckin = useCallback(
     async (guestId: string, firstName: string, aadhar: string) => {
-      await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/hotel/checkin`,
         {
           guestId: guestId,
@@ -57,6 +58,11 @@ export default function CheckIn() {
         },
         { withCredentials: true }
       );
+      if (response.status === 200) {
+        alert("Checkin successful");
+      } else {
+        alert("Checkin failed");
+      }
     },
     []
   );
@@ -125,12 +131,13 @@ export default function CheckIn() {
                     />
 
                     <Button
+                      className="cursor-pointer"
                       onClick={() => {
                         handleCheckin(guest.id, guest.fullName, guest.aadhar);
                       }}
                       variant="default"
                     >
-                      Checkin
+                      Check In
                     </Button>
                   </div>
                 ))}
